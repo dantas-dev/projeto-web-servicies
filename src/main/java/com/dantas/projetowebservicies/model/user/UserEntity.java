@@ -1,11 +1,15 @@
 package com.dantas.projetowebservicies.model.user;
 
+import com.dantas.projetowebservicies.model.order.OrderEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user")
+@Table(name = "tb_user")
 public class UserEntity implements Serializable {
 
     @Id
@@ -15,6 +19,9 @@ public class UserEntity implements Serializable {
     private String email;
     private String phone;
     private String password;
+
+    @OneToMany(mappedBy = "client")
+    private List<OrderEntity> orders = new ArrayList<>();
 
     public UserEntity() {
     }
@@ -65,6 +72,10 @@ public class UserEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<OrderEntity> getOrders() {
+        return orders;
     }
 
     @Override

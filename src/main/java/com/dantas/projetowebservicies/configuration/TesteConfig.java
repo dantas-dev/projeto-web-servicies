@@ -21,8 +21,8 @@ public class TesteConfig implements CommandLineRunner {
 
         UserEntity user1 = new UserEntity(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         UserEntity user2 = new UserEntity(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
-
         userRepository.saveAll(Arrays.asList(user1, user2));
 
+        
     }
 }
