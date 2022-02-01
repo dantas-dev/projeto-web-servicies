@@ -1,6 +1,7 @@
 package com.dantas.projetowebservicies.model.user;
 
 import com.dantas.projetowebservicies.model.order.OrderEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,6 +21,7 @@ public class UserEntity implements Serializable {
     private String phone;
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<OrderEntity> orders = new ArrayList<>();
 
