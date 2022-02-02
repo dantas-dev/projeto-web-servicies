@@ -3,6 +3,8 @@ package com.dantas.projetowebservicies.configuration;
 import com.dantas.projetowebservicies.model.category.CategoryEntity;
 import com.dantas.projetowebservicies.model.category.CategoryRepository;
 import com.dantas.projetowebservicies.model.order.OrderEntity;
+import com.dantas.projetowebservicies.model.order.OrderItemEntity;
+import com.dantas.projetowebservicies.model.order.OrderItemRepository;
 import com.dantas.projetowebservicies.model.order.OrderRepository;
 import com.dantas.projetowebservicies.model.order.enums.OrderStatus;
 import com.dantas.projetowebservicies.model.product.ProductEntity;
@@ -33,6 +35,9 @@ public class TesteConfig implements CommandLineRunner {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -55,8 +60,6 @@ public class TesteConfig implements CommandLineRunner {
         product5.getCategories().add(category2);
         productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
 
-
-
         UserEntity user1 = new UserEntity(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         UserEntity user2 = new UserEntity(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
         userRepository.saveAll(Arrays.asList(user1, user2));
@@ -66,7 +69,11 @@ public class TesteConfig implements CommandLineRunner {
         OrderEntity order3 = new OrderEntity(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT , user1);
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
 
-
+        OrderItemEntity orderItemEntity1 = new OrderItemEntity(order1, product1, 2, product1.getPrice());
+        OrderItemEntity orderItemEntity2 = new OrderItemEntity(order1, product3, 1, product3.getPrice());
+        OrderItemEntity orderItemEntity3 = new OrderItemEntity(order2, product3, 2, product3.getPrice());
+        OrderItemEntity orderItemEntity4 = new OrderItemEntity(order3, product5, 2, product5.getPrice());
+        orderItemRepository.saveAll(Arrays.asList(orderItemEntity1, orderItemEntity2, orderItemEntity3, orderItemEntity4));
 
 
     }

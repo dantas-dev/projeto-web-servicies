@@ -10,18 +10,18 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order_item")
-public class OrderItem implements Serializable {
+public class OrderItemEntity implements Serializable {
 
     @EmbeddedId
-    private OrderItemPK id;
-    
+    private OrderItemPK id = new OrderItemPK();
+
     private Integer quantity;
     private Double price;
 
-    public OrderItem() {
+    public OrderItemEntity() {
     }
 
-    public OrderItem(OrderEntity order, ProductEntity product, Integer quantity, Double price) {
+    public OrderItemEntity(OrderEntity order, ProductEntity product, Integer quantity, Double price) {
         id.setOrderEntity(order);
         id.setProductEntity(product);
         this.quantity = quantity;
@@ -64,8 +64,8 @@ public class OrderItem implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderItem orderItem = (OrderItem) o;
-        return Objects.equals(id, orderItem.id);
+        OrderItemEntity orderItemEntity = (OrderItemEntity) o;
+        return Objects.equals(id, orderItemEntity.id);
     }
 
     @Override
