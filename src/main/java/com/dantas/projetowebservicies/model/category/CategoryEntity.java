@@ -1,6 +1,7 @@
 package com.dantas.projetowebservicies.model.category;
 
 import com.dantas.projetowebservicies.model.product.ProductEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +19,8 @@ public class CategoryEntity implements Serializable {
 
     private String name;
 
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<ProductEntity> products = new HashSet<>();
 
     public CategoryEntity() {
