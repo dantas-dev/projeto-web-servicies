@@ -5,6 +5,8 @@ import com.dantas.projetowebservicies.model.category.CategoryRepository;
 import com.dantas.projetowebservicies.model.order.OrderEntity;
 import com.dantas.projetowebservicies.model.order.OrderRepository;
 import com.dantas.projetowebservicies.model.order.enums.OrderStatus;
+import com.dantas.projetowebservicies.model.product.ProductEntity;
+import com.dantas.projetowebservicies.model.product.ProductRepository;
 import com.dantas.projetowebservicies.model.user.UserEntity;
 import com.dantas.projetowebservicies.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,24 @@ public class TesteConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void run(String... args) throws Exception {
+
+        CategoryEntity category1 = new CategoryEntity(null, "Electronics");
+        CategoryEntity category2 = new CategoryEntity(null, "Books");
+        CategoryEntity category3 = new CategoryEntity(null, "Computers");
+        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+
+        ProductEntity product1 = new ProductEntity(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        ProductEntity product2 = new ProductEntity(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        ProductEntity product3 = new ProductEntity(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        ProductEntity product4 = new ProductEntity(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        ProductEntity product5 = new ProductEntity(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+        productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
+
 
         UserEntity user1 = new UserEntity(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         UserEntity user2 = new UserEntity(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
@@ -40,10 +58,8 @@ public class TesteConfig implements CommandLineRunner {
         OrderEntity order3 = new OrderEntity(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT , user1);
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
 
-        CategoryEntity category1 = new CategoryEntity(null, "Electronics");
-        CategoryEntity category2 = new CategoryEntity(null, "Books");
-        CategoryEntity category3 = new CategoryEntity(null, "Computers");
-        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+
+
 
     }
 }

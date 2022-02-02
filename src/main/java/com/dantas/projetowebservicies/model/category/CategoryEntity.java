@@ -1,8 +1,12 @@
 package com.dantas.projetowebservicies.model.category;
 
+import com.dantas.projetowebservicies.model.product.ProductEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -13,6 +17,9 @@ public class CategoryEntity implements Serializable {
     private Long id;
 
     private String name;
+
+    @Transient
+    private Set<ProductEntity> products = new HashSet<>();
 
     public CategoryEntity() {
     }
@@ -36,6 +43,10 @@ public class CategoryEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<ProductEntity> getProducts() {
+        return products;
     }
 
     @Override
