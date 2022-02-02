@@ -1,5 +1,7 @@
 package com.dantas.projetowebservicies.configuration;
 
+import com.dantas.projetowebservicies.model.category.CategoryEntity;
+import com.dantas.projetowebservicies.model.category.CategoryRepository;
 import com.dantas.projetowebservicies.model.order.OrderEntity;
 import com.dantas.projetowebservicies.model.order.OrderRepository;
 import com.dantas.projetowebservicies.model.order.enums.OrderStatus;
@@ -23,6 +25,9 @@ public class TesteConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -34,6 +39,11 @@ public class TesteConfig implements CommandLineRunner {
         OrderEntity order2 = new OrderEntity(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT , user2);
         OrderEntity order3 = new OrderEntity(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT , user1);
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+
+        CategoryEntity category1 = new CategoryEntity(null, "Electronics");
+        CategoryEntity category2 = new CategoryEntity(null, "Books");
+        CategoryEntity category3 = new CategoryEntity(null, "Computers");
+        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
 
     }
 }
