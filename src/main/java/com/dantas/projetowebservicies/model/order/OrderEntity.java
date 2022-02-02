@@ -1,5 +1,6 @@
 package com.dantas.projetowebservicies.model.order;
 
+import com.dantas.projetowebservicies.model.order.enums.OrderStatus;
 import com.dantas.projetowebservicies.model.user.UserEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -23,12 +24,15 @@ public class OrderEntity implements Serializable {
     @JoinColumn(name = "client_id")
     private UserEntity client;
 
+    private Integer orderStatus;
+
     public OrderEntity() {
     }
 
-    public OrderEntity(Long id, Instant moment, UserEntity client) {
+    public OrderEntity(Long id, Instant moment, OrderStatus orderStatus, UserEntity client) {
         this.id = id;
         this.moment = moment;
+        setOrderStatus(orderStatus);
         this.client = client;
     }
 
@@ -46,6 +50,16 @@ public class OrderEntity implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null) {
+            this.orderStatus = orderStatus.getCode();
+        }
     }
 
     public UserEntity getClient() {
