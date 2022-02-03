@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  teste-postgres-compose:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "@R4finh4ti"
+    ports:
+      - "5432:5432"
+    volumes:
+      - D:\rafael.dantas\postgres\db:/var/lib/postgresql/data
