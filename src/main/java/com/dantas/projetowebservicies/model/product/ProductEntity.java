@@ -1,6 +1,9 @@
 package com.dantas.projetowebservicies.model.product;
 
 import com.dantas.projetowebservicies.model.category.CategoryEntity;
+import com.dantas.projetowebservicies.model.order.OrderEntity;
+import com.dantas.projetowebservicies.model.order.OrderItemEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +18,7 @@ public class ProductEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
     private Double price;
@@ -26,6 +30,9 @@ public class ProductEntity implements Serializable {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryEntity> categories = new HashSet<>();
+
+    @OneToMany
+    private Set<OrderItemEntity> items = new HashSet<>();
 
     public ProductEntity() {
     }
@@ -80,6 +87,15 @@ public class ProductEntity implements Serializable {
 
     public Set<CategoryEntity> getCategories() {
         return categories;
+    }
+
+    @JsonIgnore
+    public Set<OrderEntity> getOrders() {
+        Set<OrderEntity> set = new HashSet<>();
+        for (OrderItemEntity x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override
