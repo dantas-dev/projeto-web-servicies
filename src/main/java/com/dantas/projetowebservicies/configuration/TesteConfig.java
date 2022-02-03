@@ -7,6 +7,7 @@ import com.dantas.projetowebservicies.model.order.OrderItemEntity;
 import com.dantas.projetowebservicies.model.order.OrderItemRepository;
 import com.dantas.projetowebservicies.model.order.OrderRepository;
 import com.dantas.projetowebservicies.model.order.enums.OrderStatus;
+import com.dantas.projetowebservicies.model.payment.PaymentEntity;
 import com.dantas.projetowebservicies.model.product.ProductEntity;
 import com.dantas.projetowebservicies.model.product.ProductRepository;
 import com.dantas.projetowebservicies.model.user.UserEntity;
@@ -75,6 +76,9 @@ public class TesteConfig implements CommandLineRunner {
         OrderItemEntity orderItemEntity4 = new OrderItemEntity(order3, product5, 2, product5.getPrice());
         orderItemRepository.saveAll(Arrays.asList(orderItemEntity1, orderItemEntity2, orderItemEntity3, orderItemEntity4));
 
+        PaymentEntity payment1 = new PaymentEntity(null, Instant.parse("2019-06-20T21:53:07Z"), order1);
+        order1.setPayment(payment1);
+        orderRepository.save(order1);
 
     }
 }

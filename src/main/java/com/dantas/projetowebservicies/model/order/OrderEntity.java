@@ -1,6 +1,7 @@
 package com.dantas.projetowebservicies.model.order;
 
 import com.dantas.projetowebservicies.model.order.enums.OrderStatus;
+import com.dantas.projetowebservicies.model.payment.PaymentEntity;
 import com.dantas.projetowebservicies.model.user.UserEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -30,6 +31,9 @@ public class OrderEntity implements Serializable {
 
     @OneToMany
     private Set<OrderItemEntity> items = new HashSet<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private PaymentEntity payment;
 
     public OrderEntity() {
     }
@@ -77,6 +81,14 @@ public class OrderEntity implements Serializable {
 
     public Set<OrderItemEntity> getItems() {
         return items;
+    }
+
+    public PaymentEntity getPayment() {
+        return payment;
+    }
+
+    public void setPayment(PaymentEntity payment) {
+        this.payment = payment;
     }
 
     @Override
