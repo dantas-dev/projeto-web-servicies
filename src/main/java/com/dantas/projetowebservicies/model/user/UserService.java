@@ -20,4 +20,8 @@ public class UserService {
         Optional<UserEntity> obj = repository.findById(id);
         return obj.get();
     }
+
+    public UserEntity insert(UserEntity obj) {
+        return repository.save(obj);
+    }
 }
