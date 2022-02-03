@@ -1,6 +1,7 @@
 package com.dantas.projetowebservicies.model.payment;
 
 import com.dantas.projetowebservicies.model.order.OrderEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class PaymentEntity implements Serializable {
 
     private Instant moment;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private OrderEntity order;

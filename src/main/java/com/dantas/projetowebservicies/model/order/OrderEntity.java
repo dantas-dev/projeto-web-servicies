@@ -91,6 +91,14 @@ public class OrderEntity implements Serializable {
         this.payment = payment;
     }
 
+    public Double getTotal() {
+        double sum = 0.0;
+        for (OrderItemEntity x : items) {
+            sum += x.getSubTotal();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
